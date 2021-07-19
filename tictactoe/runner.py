@@ -90,8 +90,8 @@ while True:
             tiles.append(row)
 
         game_over = ttt.terminal(board)
+        
         player = ttt.player(board)
-
         # Show title
         if game_over:
             winner = ttt.winner(board)
@@ -111,9 +111,13 @@ while True:
         # Check for AI move
         if user != player and not game_over:
             if ai_turn:
+                # print(' its my turn')
                 time.sleep(0.5)
                 move = ttt.minimax(board)
+                # print(move, "calling from runner")
+                # print(board, "calling from runner")
                 board = ttt.result(board, move)
+                print(board, "calling from runner")
                 ai_turn = False
             else:
                 ai_turn = True
