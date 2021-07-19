@@ -130,6 +130,7 @@ def neighbors_for_person(person_id):
         for person_id in movies[movie_id]["stars"]:
             neighbors.add((movie_id, person_id))
     return neighbors
+    
 
 def main():
     if len(sys.argv) > 2:
