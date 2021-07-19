@@ -95,7 +95,7 @@ def winner(board):
             if board[i][j] != first:
                 stillEqual = False
 
-        if stillEqual:
+        if stillEqual and first != EMPTY:
             return first
 
     # check columns
@@ -106,14 +106,14 @@ def winner(board):
             if board[i][j] != first:
                 stillEqual = False
 
-        if stillEqual:
+        if stillEqual and first != EMPTY:
             return first
 
     # check diagonals
     center = board[1][1]
-    if center == board[0][0] and center == board[2][2]:
+    if center == board[0][0] and center == board[2][2] and first != EMPTY:
         return center
-    elif center == board[0][2] and center == board[2][0]:
+    elif center == board[0][2] and center == board[2][0] and first != EMPTY:
         return center
     return None
 
@@ -160,9 +160,7 @@ def terminal(board):
 
 # Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
 def utility(board):
-    """
     
-    """
     if winner(board) == X:
         return 1
     elif winner(board) == O:
