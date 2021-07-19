@@ -73,7 +73,7 @@ def shortest_path(source, target):
         try:
             node = frontier.remove()
         except:
-            return None # only if frontier is empty
+            return None  # only if frontier is empty
 
         # Returning shortest path
         if node.state == target:
@@ -91,8 +91,6 @@ def shortest_path(source, target):
             if not frontier.contains_state(person) and person not in explored:
                 child = Node(person, node, movie)
                 frontier.add(child)
-
-
 
 
 def person_id_for_name(name):
