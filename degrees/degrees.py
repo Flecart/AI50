@@ -82,7 +82,7 @@ def shortest_path(source, target):
             while not node.parent == None:
                 ans.append((node.action, node.state))
                 node = node.parent
-            return ans
+            return ans[::-1]
 
         explored.add(node.state)
 
