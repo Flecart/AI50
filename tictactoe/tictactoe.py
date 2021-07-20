@@ -11,6 +11,7 @@ EMPTY = None
 
 INF = 2
 
+
 def initial_state():
     """
     Returns starting state of the board.
@@ -48,7 +49,7 @@ def player(board):
     # just count up...
     if numberOfOs == numberOfXs:
         return X
-    else: #if numberOfOs == numberOfXs:
+    else:
         return O
 
 
@@ -71,6 +72,11 @@ def actions(board):
 
 # Returns the board that results from making move (i, j) on the board.
 def result(board, action):
+
+    # check if its a valid action
+    length = len(board)
+    if action[0] >= length or action[1] >= length or action[0] < 0 or action[1] < 0:
+        raise Exception
 
     # cant let the player do more moves if its a terminal board
     if terminal(board):
@@ -116,6 +122,7 @@ def winner(board):
         return center
     elif center == board[0][2] and center == board[2][0] and first != EMPTY:
         return center
+
     return None
 
 
@@ -171,7 +178,7 @@ def utility(board):
 
 
 # returns max value possible for a particular board
-def max_giocata(board, alpha = INF):
+def max_giocata(board, alpha=INF):
 
     # se ho finito ritorno il risultato corrente
     if terminal(board):
@@ -191,12 +198,13 @@ def max_giocata(board, alpha = INF):
 
 
 # returns min value possible for a particular board
-def min_giocata(board, beta = -INF):
+
+
+def min_giocata(board, beta=-INF):
 
     # se ho finito ritorno il risultato corrente
     if terminal(board):
         return utility(board)
-
 
     # solamente un numero piu grande di tutti quelli possibili
     v = INF
@@ -210,8 +218,13 @@ def min_giocata(board, beta = -INF):
 
     return v
 
-# Returns the optimal action for the current player on the board.
+# Returns the optimal action for the current player on the board
+
+
 def minimax(board):
+
+    if terminal(board):
+        return None
 
     # questa cosa e comune! quihndi metto qua
     moves = actions(board)
@@ -232,7 +245,7 @@ def minimax(board):
 
         returnIndex = maxIndexes[random.randrange(0, len(maxIndexes))]
 
-        print(moves[returnIndex], " from x player: ", maxValue)
+        # print(moves[returnIndex], " from x player: ", maxValue)
         return moves[returnIndex]    
     else:
         v = INF
@@ -249,14 +262,16 @@ def minimax(board):
         # print(moves[returnIndex], " from O player: ", minValue)
         return moves[returnIndex] 
 
+
 # fuck pass by reference fuck!
+
+
 def spam(eggs):
     eggs[0] = 1
 
-    
 
 if __name__ == "__main__":
-    b = [['X', None, 'O'], ['X', 'X', None], ['O', None, 'O']] 
+    # result(initial_state(), (3,3))
 
     #####
     # ham = [0]
