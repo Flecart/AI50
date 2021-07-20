@@ -9,6 +9,7 @@ X = "X"
 O = "O"
 EMPTY = None
 
+INF = 2
 
 def initial_state():
     """
@@ -170,25 +171,27 @@ def utility(board):
 
 
 # returns max value possible for a particular board
-def max_giocata(board):
+def max_giocata(board, alpha = INF):
 
     # se ho finito ritorno il risultato corrente
     if terminal(board):
         return utility(board)
 
     # solamente un numero piu piccolo di tutti quelli possibili
-    v = -2
+    v = -INF
 
     moves = actions(board)
 
     for move in moves:
-        v = max(v, min_giocata(result(board, move)))
+        v = max(v, min_giocata(result(board, move), v))
+        if v > alpha:
+            return INF
 
     return v
 
 
 # returns min value possible for a particular board
-def min_giocata(board):
+def min_giocata(board, beta = -INF):
 
     # se ho finito ritorno il risultato corrente
     if terminal(board):
@@ -196,12 +199,14 @@ def min_giocata(board):
 
 
     # solamente un numero piu grande di tutti quelli possibili
-    v = 2
+    v = INF
 
     moves = actions(board)
 
     for move in moves:
-        v = min(v, max_giocata(result(board, move)))
+        v = min(v, max_giocata(result(board, move), v))
+        if v < beta:
+            return -INF
 
     return v
 
@@ -214,12 +219,12 @@ def minimax(board):
 
     # due casi possibili!
     if player(board) == X:
-        v = -2
+        v = -INF
         movesResult = []
         for i in range(totalMoves):
             next = max_giocata(result(board, moves[i]))
             movesResult.append(next)
-            print(f"value of the move {moves[i]} is {next}, current v: {v}")
+            # print(f"value of the move {moves[i]} is {next}, current v: {v}")
         
         maxValue = max(movesResult)
 
@@ -230,18 +235,18 @@ def minimax(board):
         print(moves[returnIndex], " from x player: ", maxValue)
         return moves[returnIndex]    
     else:
-        v = 2
+        v = INF
         movesResult = []
         for i in range(totalMoves):
             next = max_giocata(result(board, moves[i]))
             movesResult.append(next)
-            print(f"value of the move {moves[i]} is {next}, current v: {v}")
+            # print(f"value of the move {moves[i]} is {next}, current v: {v}")
 
         minValue = min(movesResult)
         minIndexes = [i for i in range(totalMoves) if movesResult[i] == minValue]
         returnIndex = minIndexes[random.randrange(0, len(minIndexes))]
 
-        print(moves[returnIndex], " from O player: ", minValue)
+        # print(moves[returnIndex], " from O player: ", minValue)
         return moves[returnIndex] 
 
 # fuck pass by reference fuck!
@@ -261,5 +266,5 @@ if __name__ == "__main__":
     # b = initial_state()
     # b[0][0] = X
     # b[0][1] = O
-    # b[0][2] = X
+    # b[0][INF] = X
     # print(player(b))
