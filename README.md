@@ -9,4 +9,4 @@ Pls Don't copy my solutions, i made them public so everyone could know i was doi
 mmm maybe i shouldn't made it public, anyway, complain and i'll make this private again.
 
 watch the cute CS50 cat leeeel
-![CS50 cat](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fcs50&psig=AOvVaw3tXkAJDLIs5VVytJ7Yxfrh&ust=1626882208434000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMjajtP-8fECFQAAAAAdAAAAABAD)
+![CS50 cat](https://yt3.ggpht.com/ytc/AKedOLTZloGQkLBOEhaQ7mR-DLvcslyP1bq4EIcIXPqNMA=s900-c-k-c0x00ffffff-no-rj)
