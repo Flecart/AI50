@@ -57,7 +57,17 @@ def transition_model(corpus, page, damping_factor):
     linked to by `page`. With probability `1 - damping_factor`, choose
     a link at random chosen from all pages in the corpus.
     """
-    raise NotImplementedError
+
+    answer = dict()
+    links_in_page = len(corpus[page])
+    for key in corpus:
+        if key not in corpus[page]:
+            answer[key] = (1 - damping_factor) / len(corpus)
+    for key in corpus[page]:
+        # 1 sarebbe la probability di essere sulla pagina corrente
+        answer[key] = (1 - damping_factor) / len(corpus) + damping_factor * 1 / links_in_page 
+
+    return answer
 
 
 def sample_pagerank(corpus, damping_factor, n):
@@ -69,7 +79,56 @@ def sample_pagerank(corpus, damping_factor, n):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    raise NotImplementedError
+    def get_random_page(thresholds, value):
+
+        # sanity 
+        if value > thresholds[-1][0]:
+            raise Exception("strange error")
+
+        i = 1
+        while value > thresholds[i][0]:
+            i += 1
+
+        return thresholds[i][1]
+
+    def make_threshholds(page):
+        thresholds = [(0, 0)]
+        probabilities = transition_model(corpus, page, damping_factor)
+        # print(f"these are the probabilities {probabilities}, at {page}")
+        i = 0
+        for key in probabilities:
+            # make thresholds for random values later
+            thresholds.append((thresholds[i][0] + probabilities[key], key))
+            i += 1
+
+        return thresholds
+
+    answer = dict()
+    
+    first_page = random.randrange(0, len(corpus))
+    random_chosen_page = [key for key in corpus][first_page]
+    # initialize values for answer dict
+    for key in corpus:
+        answer[key] = 0
+        if key == random_chosen_page:
+            answer[key] = 1
+    
+    thresholds = make_threshholds(random_chosen_page)
+
+    for _ in range(n - 1):
+        random_value = random.random() * thresholds[-1][0]  # that is the max value
+        key = get_random_page(thresholds, random_value)
+        answer[key] += 1
+        thresholds = make_threshholds(key)
+        # print(thresholds)
+
+    for key in answer:
+        answer[key] = answer[key] / n
+
+    # print(answer, sum([answer[key] for key in answer]))
+    # assert (sum([answer[key] for key in answer]) == 1) # python floating point imprecision....
+
+    return answer
 
 
 def iterate_pagerank(corpus, damping_factor):
@@ -81,7 +140,50 @@ def iterate_pagerank(corpus, damping_factor):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    raise NotImplementedError
+    # update the changes array
+    def update_changes(old_sample, new_sample):
+        i = 0
+        for key in old_sample:
+            changes[i] = abs(old_sample[key] - new_sample[key])
+            i += 1
+
+    # see if the answer dics has changed enough
+    def has_changed_enough():
+        for number in changes:
+            if number > LIMIT:
+                return True
+        return False
+
+    def normalize(dictionary):
+        current_sum = sum([dictionary[key] for key in dictionary])
+        return {key: dictionary[key] / current_sum for key in dictionary}
+
+    def invert(corpus_email):
+        my_dict = {key: set() for key in corpus_email}
+
+        for key in corpus_email:
+            for connection in corpus_email[key]:
+                my_dict[connection].add(key)
+
+        return my_dict
+
+    LIMIT = 0.0005
+
+    corpus_len = len(corpus)
+    answer = {key: 1 / corpus_len for key in corpus}
+    changes = [LIMIT + 1] * corpus_len
+
+    inverted_corpus = invert(corpus)
+    while has_changed_enough():
+        new = {key: ((1 - damping_factor) / corpus_len + damping_factor * 
+                     sum([answer[connections] / len(corpus[connections]) for connections in inverted_corpus[key]])) for key in answer}
+        new = normalize(new)
+        update_changes(new, answer)
+        answer = new
+
+    # print(answer, sum([answer[key] for key in answer]))
+    # assert (sum([answer[key] for key in answer]) == 1)
+    return answer
 
 
 if __name__ == "__main__":
