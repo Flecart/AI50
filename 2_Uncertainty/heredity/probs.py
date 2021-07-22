@@ -31,7 +31,20 @@ PROBS = {
     # Mutation probability
     "mutation": 0.01
 }
-
+probabilities = {
+        person: {
+            "gene": {
+                2: 0,
+                1: 0,
+                0: 0
+            },
+            "trait": {
+                True: 0,
+                False: 0
+            }
+        }
+        for person in people
+    }
 def changeValue():
     PROBS["gene"][0] = 1
 

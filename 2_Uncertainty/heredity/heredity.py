@@ -170,6 +170,7 @@ def joint_probability(people, one_gene, two_genes, have_trait):
     def traitProbability(genes):
         return sum([PROBS['trait'][i][True] * genes[i] for i in PROBS['gene']])
 
+    # this was for an unused func...
     def mutate(sureTrait):
         hasMutate = True if random.random() < PROBS["mutation"] else False
 
@@ -177,6 +178,11 @@ def joint_probability(people, one_gene, two_genes, have_trait):
             return not sureTrait
         else:
             return sureTrait
+
+    # return the probability that parent prob
+    # could gain probability from a mutation
+    def mutate_with_probs(parent_prob):
+        return parent_prob + (1 - parent_prob) * PROBS["mutation"] * random.random()
 
     def get_parents(children):
         return people[children['mother']], people[children['father']]
@@ -198,14 +204,16 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         # The fact the parents has 0 1 2 genes are separate
         # so i want their sum is 0.5
         parent_probs = mini_normalize((iCP(parent_trait, 0), iCP(parent_trait, 1), iCP(parent_trait, 2)))
-        print(f"the probability of the parent {parent['name']} are {parent_probs}")
+        # print(f"the probability of the parent {parent['name']} are {parent_probs}")
         # print(f"the probability to give a gene by {parent['name']} is \n", 
-        #       f"{parent_probs[1] * 0.5 + parent_probs[2] * (1 - PROBS['mutation'])} \n", 
+        #       f"{parent_probs[1] * 0.5 + parent_probs[2]} \n", 
         #       f"and that one of not giving the gene is \n",
-        #       f"{parent_probs[1] * 0.5 + parent_probs[0] * (1 - PROBS['mutation'])}")
+        #       f"{parent_probs[1] * 0.5 + parent_probs[0]} \n",
+        #       f"the sum of the two probabilities is \n",
+        #       parent_probs[1] * 0.5 + parent_probs[2] + parent_probs[1] * 0.5 + parent_probs[0])
 
         # not sure if this works, try to make some tests
-        return parent_probs[1] * 0.5 + parent_probs[2] * (1 - PROBS['mutation'])
+        return parent_probs[1] * 0.5 + parent_probs[2]
 
     # returns the parent gene UNUSED, and dont know if i should make this
     def parent_given_gene(parent):
@@ -224,6 +232,9 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         father_prob = parent_given_gene_probability(father)
         mother_prob = parent_given_gene_probability(mother)
 
+        father_prob = mutate_with_probs(father_prob)
+        mother_prob = mutate_with_probs(mother_prob)
+
         zero = (1 - father_prob) * (1 - mother_prob)
         one = father_prob * (1 - mother_prob) + mother_prob * (1 - father_prob)
         two = father_prob * mother_prob
@@ -238,7 +249,7 @@ def joint_probability(people, one_gene, two_genes, have_trait):
             # TODO make the case where the trait of the children is known!
             children_genes = parent_to_children(people[person])
             
-            print(f"the probabilities for the children are { children_genes } ")
+            # print(f"the probabilities for the children are { children_genes } ")
 
             if person in one_gene:
                 final_prob *= children_genes[1]
@@ -253,15 +264,24 @@ def joint_probability(people, one_gene, two_genes, have_trait):
             continue
         
         # parent stuff calculations
-        if person in one_gene:
-            final_prob *= PROBS["gene"][1]
-        elif person in two_genes:
-            final_prob *= PROBS["gene"][2]
+        person_trait = people[person]['trait']
+        if person_trait != None:
+            if person in one_gene:
+                final_prob *= iCP(person_trait, 1)
+            elif person in two_genes:
+                final_prob *= iCP(person_trait, 2)
+            else:
+                final_prob *= iCP(person_trait, 0)
         else:
-            final_prob *= PROBS["gene"][0]
+            if person in one_gene:
+                final_prob *= gene_from_Children(parent, 1)
+            elif person in two_genes:
+                final_prob *= gene_from_Children(parent, 2)
+            else:
+                final_prob *= gene_from_Children(parent, 0)
         
         if person in have_trait:
-            if people[person]['trait'] != None:
+            if person_trait != None:
                 final_prob *= 1
             else:
                 print(f"im {person} i should have trait = None")
@@ -271,7 +291,7 @@ def joint_probability(people, one_gene, two_genes, have_trait):
                 # TODO stuff related to his childs
                 raise NotImplementedError
     
-    print(f"and the final probability is {final_prob}")
+    # print(f"and the final probability is {final_prob}")
     return final_prob
 
 
