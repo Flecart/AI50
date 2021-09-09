@@ -155,73 +155,27 @@ def joint_probability(people, one_gene, two_genes, have_trait):
 
         return True
 
-    # returns probability that the parent has 0 1 2 genes
-    # given his trait
-    def iCP(haveTrait, gene):  # AKA inverseConditionalProbability
-
-        if gene not in PROBS['gene']:
-            raise Exception("Not good gene")
-
-        # partial sum of all the conditional probabilities
-        trait = sum([PROBS['trait'][i][haveTrait] for i in PROBS['gene']])
-        return PROBS['trait'][gene][haveTrait] * PROBS['gene'][gene] / trait
-
-    # given input of genes probability calculates the probability of the trait
-    def traitProbability(genes):
-        return sum([PROBS['trait'][i][True] * genes[i] for i in PROBS['gene']])
-
-    # this was for an unused func...
-    def mutate(sureTrait):
-        hasMutate = True if random.random() < PROBS["mutation"] else False
-
-        if hasMutate:
-            return not sureTrait
-        else:
-            return sureTrait
-
-    # return the probability that parent prob
-    # could gain probability from a mutation
-    def mutate_with_probs(parent_prob):
-        return parent_prob + (1 - parent_prob) * PROBS["mutation"] * random.random()
-
     def get_parents(children):
         return people[children['mother']], people[children['father']]
 
-    def mini_normalize(tuple):
-        the_sum = sum(tuple)
-        return [i / the_sum for i in tuple]
-
     # returns the probability to give a gene, 
     def parent_given_gene_probability(parent):
-        if parent['trait'] != None:
-            parent_trait = parent['trait']
+        parent = parent['name']
+        if parent in two_genes:
+            return 1 - PROBS['mutation']
+        elif parent in one_gene:
+            return 0.5
         else:
-
-            # if the parent has no possible traits, just give it based on the PROBS
-            return PROBS['gene'][1] * 0.5 + PROBS['gene'][2]
-
-        # The fact the parents has 0 1 2 genes are separate
-        # so i want their sum is 0.5
-        parent_probs = mini_normalize((iCP(parent_trait, 0), iCP(parent_trait, 1), iCP(parent_trait, 2)))
-        # print(f"the probability of the parent {parent['name']} are {parent_probs}")
-        # print(f"the probability to give a gene by {parent['name']} is \n", 
-        #       f"{parent_probs[1] * 0.5 + parent_probs[2]} \n", 
-        #       f"and that one of not giving the gene is \n",
-        #       f"{parent_probs[1] * 0.5 + parent_probs[0]} \n",
-        #       f"the sum of the two probabilities is \n",
-        #       parent_probs[1] * 0.5 + parent_probs[2] + parent_probs[1] * 0.5 + parent_probs[0])
-
-        # not sure if this works, try to make some tests
-        return parent_probs[1] * 0.5 + parent_probs[2]
-
-    # returns the parent gene UNUSED, and dont know if i should make this
-    def parent_given_gene(parent):
-        if parent['trait'] != None:
-            parent_trait = parent['trait']
-            return mutate(parent_trait)
-
-        # Else chose randomly
-        return True if random.random() > 0.5 else False
+            return PROBS['mutation']
+        
+    def children_given_parents_probabilities(mother_prob, father_prob, children):
+        children = children['name']
+        if children in two_genes:
+            return mother_prob * father_prob
+        elif children in one_gene:
+            return mother_prob * (1 - father_prob) + (1 - mother_prob) * father_prob
+        else:
+            return (1 - mother_prob) * (1 - father_prob)
 
     # returns the probabilities of the children gene
     def parent_to_children(children):
@@ -231,95 +185,40 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         father_prob = parent_given_gene_probability(father)
         mother_prob = parent_given_gene_probability(mother)
 
-        father_prob = mutate_with_probs(father_prob)
-        mother_prob = mutate_with_probs(mother_prob)
+        return children_given_parents_probabilities(mother_prob, father_prob, children)
 
-        zero = (1 - father_prob) * (1 - mother_prob)
-        one = father_prob * (1 - mother_prob) + mother_prob * (1 - father_prob)
-        two = father_prob * mother_prob
+    def parent_probs(parent):
+        if parent in one_gene:
+            return PROBS['gene'][1]
+        elif parent in two_genes:
+            return PROBS['gene'][2]
+        else:
+            return PROBS['gene'][0]
 
-        return (zero, one, two)
-
-    def get_children(parent):
-        for person in people:
-            if people[person]['mother'] == parent or people[person]['father'] == parent:
-                return person
-
-        return False
-
-    def get_other_parent_prob(children, parent):
-        other_parent = people[children]['mother'] if people[children]['mother'] != parent else people[children]['father']
-        parent_trait = people[other_parent]['trait']
-        return mini_normalize((iCP(parent_trait, 0), iCP(parent_trait, 1), iCP(parent_trait, 2)))
-
-    # returns the probability of parent of having that gene (not having the traits)
-    def gene_from_children(parent):
+    def trait_probs(person):
+        """ 
+        calculate probability of having or not having the trait 
         """
-        i dont think this is usefull after i have implemented this....
-        i don't think i can derive the parents genes based on the children...
-        its right that we can have some probabilities... but its not useful
-        """
-        children = get_children(parent)
-        if not children:
-            raise Exception("Couldn't find a children for this parent")
 
-        children_trait = people[children]['trait']
-        children_probs = mini_normalize((iCP(children_trait, 0), iCP(children_trait, 1), iCP(children_trait, 2)))
-        other_parent_prob = get_other_parent_prob(children, parent)
-
-        prob = children_probs[2] / other_parent_prob[2]  # probability of the parent to give the gene..
-        return prob
+        if person in one_gene:
+            return PROBS['trait'][1][person in have_trait]
+        elif person in two_genes:
+            return PROBS['trait'][2][person in have_trait]
+        else:
+            return PROBS['trait'][0][person in have_trait]
 
     final_prob = 1
 
-    # no_gene = [person for person in people if person not in one_gene and person not in two_genes]
     for person in people:
 
-        person_trait = people[person]['trait']
-        if person_trait != None:
-            if person in one_gene:
-                final_prob *= iCP(person_trait, 1)
-            elif person in two_genes:
-                final_prob *= iCP(person_trait, 2)
-            else:
-                final_prob *= iCP(person_trait, 0)
-
-            if person in have_trait and person_trait == True:
-                final_prob *= 1
-            elif person in have_trait and person_trait == False:
-                final_prob = 0
-
-            continue
-
+        # different cases if is child or not
         if is_Child(people[person]):
-            children_genes = parent_to_children(people[person])
-            
-            # print(f"the probabilities for the children are { children_genes } ")
-
-            if person in one_gene:
-                final_prob *= children_genes[1]
-            elif person in two_genes:
-                final_prob *= children_genes[2]
-            else:
-                final_prob *= children_genes[0]
-
-            if person in have_trait:
-                final_prob *= traitProbability(children_genes)
-
-            continue
-        
-        # parent stuff calculations
-        if person in one_gene:
-            final_prob *= PROBS['gene'][1]
-        elif person in two_genes:
-            final_prob *= PROBS['gene'][2]
+            final_prob *= parent_to_children(people[person])
         else:
-            final_prob *= PROBS['gene'][0]
+            final_prob *= parent_probs(person)
 
-        if person in have_trait:
-            final_prob *= sum([PROBS['trait'][i][True] * PROBS['gene'][i] for i in PROBS['gene']])
-        
-    # print(f"and the final probability is {final_prob}")
+        final_prob *= trait_probs(person)
+
     return final_prob
 
 
