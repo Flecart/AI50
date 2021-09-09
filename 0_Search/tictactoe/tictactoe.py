@@ -84,8 +84,6 @@ def result(board, action):
         return board
 
     currentPlayer = player(board)
-    # print(currentPlayer, " calling from result")
-    # print(action)
 
     newBoard = copyBoard(board)
     newBoard[action[0]][action[1]] = currentPlayer
@@ -211,7 +209,6 @@ def minimax(board):
         for i in range(totalMoves):
             next = min_giocata(result(board, moves[i]))
             movesResult.append(next)
-            # print(f"value of the move {moves[i]} is {next}, current v: {v}")
         
         maxValue = max(movesResult)
 
@@ -219,7 +216,6 @@ def minimax(board):
 
         returnIndex = maxIndexes[0]  # maxIndexes[random.randrange(0, len(maxIndexes))]
 
-        # print(moves[returnIndex], " from x player: ", maxValue)
         return moves[returnIndex]    
     else:
         v = INF
@@ -233,18 +229,5 @@ def minimax(board):
         minIndexes = [i for i in range(totalMoves) if movesResult[i] == minValue]
         returnIndex = minIndexes[0]  # minIndexes[random.randrange(0, len(minIndexes))]
 
-        # print(moves[returnIndex], " from O player: ", minValue)
         return moves[returnIndex] 
 
-
-# some debuging attemps
-if __name__ == "__main__":
-    pass
-    # result(initial_state(), (3,3))
-
-    ########
-    # b = initial_state()
-    # b[0][0] = X
-    # b[0][1] = O
-    # b[0][INF] = X
-    # print(player(b))
