@@ -2,7 +2,6 @@
 Tic Tac Toe Player
 """
 
-import math
 import random
 
 X = "X"
@@ -21,7 +20,6 @@ def initial_state():
             [EMPTY, EMPTY, EMPTY]]
 
 
-# i didn't know that python could pass by reference :'(
 def copyBoard(board):
     newBoard = initial_state()
     length = len(board)
@@ -33,8 +31,10 @@ def copyBoard(board):
     return newBoard
 
 
-# The player function should take a board state as input, and return which player’s turn it is (either X or O).
 def player(board):
+    """
+    The player function should take a board state as input, and return which player’s turn it is (either X or O).
+    """
     numberOfXs = 0
     numberOfOs = 0
 
@@ -53,9 +53,10 @@ def player(board):
         return O
 
 
-# Returns set of all possible actions (i, j) available on the board.
 def actions(board):
-
+    """
+    Returns set of all possible actions (i, j) available on the board.
+    """
     # will append everything to this thing!
     answer = []
 
@@ -75,7 +76,7 @@ def result(board, action):
 
     # check if its a valid action
     length = len(board)
-    if action[0] >= length or action[1] >= length or action[0] < 0 or action[1] < 0:
+    if action[0] >= length or action[1] >= length or action[0] < 0 or action[1] < 0 or board[action[0]][action[1]] != EMPTY:
         raise Exception
 
     # cant let the player do more moves if its a terminal board
@@ -126,49 +127,26 @@ def winner(board):
     return None
 
 
-# Returns True if game is over, False otherwise.
+
 def terminal(board):
-    # this function is so similiar to the winner one... maybe i shouldnt repeat..
-    # but i dont caaaare
-    # check rows
-    for i in range(3):
-        stillEqual = True
-        first = board[i][0]
-        for j in range(1, 3):
-            if board[i][j] != first:
-                stillEqual = False
+    """
+    Returns True if game is over, False otherwise.
+    """
 
-        if stillEqual and first != EMPTY:
-            return True
-
-    # check columns
-    for j in range(3):
-        stillEqual = True
-        first = board[0][j]
-        for i in range(1, 3):
-            if board[i][j] != first:
-                stillEqual = False
-
-        if stillEqual and first != EMPTY:
-            return True
-
-    # check diagonals
-    center = board[1][1]
-    if center == board[0][0] and center == board[2][2] and center != EMPTY:
-        return True
-    elif center == board[0][2] and center == board[2][0] and center != EMPTY:
+    if winner(board) != None:
         return True
 
-    # check possible moves
     if len(actions(board)) == 0:
         return True
 
     return False
 
 
-# Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
 def utility(board):
-    
+    """
+    Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
+    """
+
     if winner(board) == X:
         return 1
     elif winner(board) == O:
@@ -177,32 +155,30 @@ def utility(board):
         return 0
 
 
-# returns max value possible for a particular board
 def max_giocata(board, alpha=INF):
-
+    """
+    returns max value possible for a particular board
+    """
     # se ho finito ritorno il risultato corrente
     if terminal(board):
         return utility(board)
 
     # solamente un numero piu piccolo di tutti quelli possibili
     v = -INF
-
     moves = actions(board)
 
     for move in moves:
         v = max(v, min_giocata(result(board, move), v))
         if v > alpha:
-            return INF
+            return v
 
     return v
 
 
-# returns min value possible for a particular board
-
-
 def min_giocata(board, beta=-INF):
-
-    # se ho finito ritorno il risultato corrente
+    """
+    returns min value possible for a particular board
+    """
     if terminal(board):
         return utility(board)
 
@@ -214,28 +190,26 @@ def min_giocata(board, beta=-INF):
     for move in moves:
         v = min(v, max_giocata(result(board, move), v))
         if v < beta:
-            return -INF
+            return v
 
     return v
 
-# Returns the optimal action for the current player on the board
-
 
 def minimax(board):
-
+    """
+    Returns the optimal action for the current player on the board
+    """
     if terminal(board):
         return None
 
-    # questa cosa e comune! quihndi metto qua
     moves = actions(board)
     totalMoves = len(moves)
 
-    # due casi possibili!
     if player(board) == X:
         v = -INF
         movesResult = []
         for i in range(totalMoves):
-            next = max_giocata(result(board, moves[i]))
+            next = min_giocata(result(board, moves[i]))
             movesResult.append(next)
             # print(f"value of the move {moves[i]} is {next}, current v: {v}")
         
@@ -243,7 +217,7 @@ def minimax(board):
 
         maxIndexes = [i for i in range(totalMoves) if movesResult[i] == maxValue]
 
-        returnIndex = maxIndexes[random.randrange(0, len(maxIndexes))]
+        returnIndex = maxIndexes[0]  # maxIndexes[random.randrange(0, len(maxIndexes))]
 
         # print(moves[returnIndex], " from x player: ", maxValue)
         return moves[returnIndex]    
@@ -257,26 +231,17 @@ def minimax(board):
 
         minValue = min(movesResult)
         minIndexes = [i for i in range(totalMoves) if movesResult[i] == minValue]
-        returnIndex = minIndexes[random.randrange(0, len(minIndexes))]
+        returnIndex = minIndexes[0]  # minIndexes[random.randrange(0, len(minIndexes))]
 
         # print(moves[returnIndex], " from O player: ", minValue)
         return moves[returnIndex] 
 
 
-# fuck pass by reference fuck!
-
-
-def spam(eggs):
-    eggs[0] = 1
-
-
+# some debuging attemps
 if __name__ == "__main__":
+    pass
     # result(initial_state(), (3,3))
 
-    #####
-    # ham = [0]
-    # spam(ham)
-    # print(ham)
     ########
     # b = initial_state()
     # b[0][0] = X
