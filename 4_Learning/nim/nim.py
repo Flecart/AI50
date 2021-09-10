@@ -101,7 +101,12 @@ class NimAI():
         Return the Q-value for the state `state` and the action `action`.
         If no Q-value exists yet in `self.q`, return 0.
         """
-        raise NotImplementedError
+        try:
+            return_value = self.q[(tuple(state), action)]
+            return return_value
+        # return 0 if key does not exist.
+        except KeyError:
+            return 0
 
     def update_q_value(self, state, action, old_q, reward, future_rewards):
         """
@@ -118,7 +123,18 @@ class NimAI():
         `alpha` is the learning rate, and `new value estimate`
         is the sum of the current reward and estimated future rewards.
         """
-        raise NotImplementedError
+        # updating with the given formula, similiar to perceptron updating.
+        self.q[(tuple(state), action)] = old_q + self.alpha * ( ( reward + future_rewards ) - old_q)
+
+    def available_actions(self, piles):
+        """
+        Copied from Nim
+        """
+        actions = set()
+        for i, pile in enumerate(piles):
+            for j in range(1, pile + 1):
+                actions.add((i, j))
+        return list(actions)
 
     def best_future_reward(self, state):
         """
@@ -130,7 +146,14 @@ class NimAI():
         Q-value in `self.q`. If there are no available actions in
         `state`, return 0.
         """
-        raise NotImplementedError
+
+        actions = self.available_actions(state)
+
+        # returning the max possible q_value
+        if len(actions) > 0:
+            return max([self.get_q_value(state, action) for action in actions])
+        else:
+            return 0
 
     def choose_action(self, state, epsilon=True):
         """
@@ -147,7 +170,20 @@ class NimAI():
         If multiple actions have the same Q-value, any of those
         options is an acceptable return value.
         """
-        raise NotImplementedError
+        actions = self.available_actions(state)
+
+        # chooses randomly only if epsilon is setted and random is minor of epsilon
+        if epsilon:
+            if random.random() < epsilon:
+                return actions[random.randint(0, len(actions) - 1)]
+
+        q_values = [self.get_q_value(state, action) for action in actions]
+
+        # returning action with highest q_value
+        max_value = max(q_values)
+        for i in range(len(q_values)):
+            if q_values[i] == max_value:
+                return actions[i]
 
 
 def train(n):
