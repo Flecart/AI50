@@ -1,0 +1,324 @@
+Currently looking at relu with relu
+11/11 - 0s - loss: 0.0071 - accuracy: 0.9970
+Model saved to model-small.relu-relu.
+Fitting model with relu with relu took 4.01239013671875 seconds
+Currently looking at relu with sigmoid
+11/11 - 0s - loss: 0.9505 - accuracy: 0.6190
+Model saved to model-small.relu-sigmoid.
+Fitting model with relu with sigmoid took 3.3501803874969482 seconds
+Currently looking at relu with softmax
+11/11 - 0s - loss: 0.9700 - accuracy: 0.6190
+Model saved to model-small.relu-softmax.
+Fitting model with relu with softmax took 2.805978775024414 seconds
+Currently looking at relu with softplus
+11/11 - 0s - loss: 0.0361 - accuracy: 0.9940
+Model saved to model-small.relu-softplus.
+Fitting model with relu with softplus took 2.8331665992736816 seconds
+Currently looking at relu with softsign
+11/11 - 0s - loss: 0.0335 - accuracy: 0.9940
+Model saved to model-small.relu-softsign.
+Fitting model with relu with softsign took 2.9039721488952637 seconds
+Currently looking at relu with tanh
+11/11 - 0s - loss: 0.8826 - accuracy: 0.6190
+Model saved to model-small.relu-tanh.
+Fitting model with relu with tanh took 2.6850199699401855 seconds
+Currently looking at relu with selu
+11/11 - 0s - loss: 5.4057e-04 - accuracy: 1.0000
+Model saved to model-small.relu-selu.
+Fitting model with relu with selu took 2.5572750568389893 seconds
+Currently looking at relu with elu
+11/11 - 0s - loss: 0.0050 - accuracy: 0.9970
+Model saved to model-small.relu-elu.
+Fitting model with relu with elu took 2.660198211669922 seconds
+Currently looking at relu with exponential
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.relu-exponential.
+Fitting model with relu with exponential took 2.497884750366211 seconds
+Currently looking at sigmoid with relu
+11/11 - 0s - loss: 0.0011 - accuracy: 1.0000
+Model saved to model-small.sigmoid-relu.
+Fitting model with sigmoid with relu took 2.6543445587158203 seconds
+Currently looking at sigmoid with sigmoid
+11/11 - 0s - loss: 0.0184 - accuracy: 1.0000
+Model saved to model-small.sigmoid-sigmoid.
+Fitting model with sigmoid with sigmoid took 3.1556880474090576 seconds
+Currently looking at sigmoid with softmax
+11/11 - 0s - loss: 0.7344 - accuracy: 0.8036
+Model saved to model-small.sigmoid-softmax.
+Fitting model with sigmoid with softmax took 3.2193026542663574 seconds
+Currently looking at sigmoid with softplus
+11/11 - 0s - loss: 0.0107 - accuracy: 0.9970
+Model saved to model-small.sigmoid-softplus.
+Fitting model with sigmoid with softplus took 3.306182384490967 seconds
+Currently looking at sigmoid with softsign
+11/11 - 0s - loss: 0.0048 - accuracy: 0.9970
+Model saved to model-small.sigmoid-softsign.
+Fitting model with sigmoid with softsign took 3.640977382659912 seconds
+Currently looking at sigmoid with tanh
+11/11 - 0s - loss: 0.0047 - accuracy: 0.9970
+Model saved to model-small.sigmoid-tanh.
+Fitting model with sigmoid with tanh took 3.3617756366729736 seconds
+Currently looking at sigmoid with selu
+11/11 - 0s - loss: 0.0022 - accuracy: 1.0000
+Model saved to model-small.sigmoid-selu.
+Fitting model with sigmoid with selu took 3.259164810180664 seconds
+Currently looking at sigmoid with elu
+11/11 - 0s - loss: 0.0076 - accuracy: 0.9970
+Model saved to model-small.sigmoid-elu.
+Fitting model with sigmoid with elu took 3.37567138671875 seconds
+Currently looking at sigmoid with exponential
+11/11 - 0s - loss: 0.4447 - accuracy: 0.6190
+Model saved to model-small.sigmoid-exponential.
+Fitting model with sigmoid with exponential took 3.3014750480651855 seconds
+Currently looking at softmax with relu
+11/11 - 0s - loss: 0.0048 - accuracy: 0.9970
+Model saved to model-small.softmax-relu.
+Fitting model with softmax with relu took 3.7052998542785645 seconds
+Currently looking at softmax with sigmoid
+11/11 - 0s - loss: 0.0069 - accuracy: 0.9970
+Model saved to model-small.softmax-sigmoid.
+Fitting model with softmax with sigmoid took 4.992344856262207 seconds
+Currently looking at softmax with softmax
+11/11 - 0s - loss: 0.6634 - accuracy: 0.9970
+Model saved to model-small.softmax-softmax.
+Fitting model with softmax with softmax took 3.336261510848999 seconds
+Currently looking at softmax with softplus
+11/11 - 0s - loss: 0.0072 - accuracy: 0.9940
+Model saved to model-small.softmax-softplus.
+Fitting model with softmax with softplus took 3.0272483825683594 seconds
+Currently looking at softmax with softsign
+11/11 - 0s - loss: 0.0023 - accuracy: 1.0000
+Model saved to model-small.softmax-softsign.
+Fitting model with softmax with softsign took 3.2138478755950928 seconds
+Currently looking at softmax with tanh
+11/11 - 0s - loss: 0.0017 - accuracy: 1.0000
+Model saved to model-small.softmax-tanh.
+Fitting model with softmax with tanh took 3.3534088134765625 seconds
+Currently looking at softmax with selu
+11/11 - 0s - loss: 0.0012 - accuracy: 1.0000
+Model saved to model-small.softmax-selu.
+Fitting model with softmax with selu took 2.883957624435425 seconds
+Currently looking at softmax with elu
+11/11 - 0s - loss: 0.0020 - accuracy: 1.0000
+Model saved to model-small.softmax-elu.
+Fitting model with softmax with elu took 3.009197235107422 seconds
+Currently looking at softmax with exponential
+11/11 - 0s - loss: 0.0075 - accuracy: 0.9970
+Model saved to model-small.softmax-exponential.
+Fitting model with softmax with exponential took 3.143904447555542 seconds
+Currently looking at softplus with relu
+11/11 - 0s - loss: 5.6026e-04 - accuracy: 1.0000
+Model saved to model-small.softplus-relu.
+Fitting model with softplus with relu took 3.462717294692993 seconds
+Currently looking at softplus with sigmoid
+11/11 - 0s - loss: 0.9517 - accuracy: 0.6190
+Model saved to model-small.softplus-sigmoid.
+Fitting model with softplus with sigmoid took 4.3615946769714355 seconds
+Currently looking at softplus with softmax
+11/11 - 0s - loss: 0.9765 - accuracy: 0.6190
+Model saved to model-small.softplus-softmax.
+Fitting model with softplus with softmax took 3.1469874382019043 seconds
+Currently looking at softplus with softplus
+11/11 - 0s - loss: 1.6482e-05 - accuracy: 1.0000
+Model saved to model-small.softplus-softplus.
+Fitting model with softplus with softplus took 3.2942659854888916 seconds
+Currently looking at softplus with softsign
+11/11 - 0s - loss: 0.0152 - accuracy: 0.9911
+Model saved to model-small.softplus-softsign.
+Fitting model with softplus with softsign took 3.338796854019165 seconds
+Currently looking at softplus with tanh
+11/11 - 0s - loss: 0.9592 - accuracy: 0.6190
+Model saved to model-small.softplus-tanh.
+Fitting model with softplus with tanh took 3.290992498397827 seconds
+Currently looking at softplus with selu
+11/11 - 0s - loss: 0.0280 - accuracy: 0.9970
+Model saved to model-small.softplus-selu.
+Fitting model with softplus with selu took 3.1143550872802734 seconds
+Currently looking at softplus with elu
+11/11 - 0s - loss: 0.0108 - accuracy: 0.9970
+Model saved to model-small.softplus-elu.
+Fitting model with softplus with elu took 3.3956027030944824 seconds
+Currently looking at softplus with exponential
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.softplus-exponential.
+Fitting model with softplus with exponential took 3.4205026626586914 seconds
+Currently looking at softsign with relu
+11/11 - 0s - loss: 0.0032 - accuracy: 0.9970
+Model saved to model-small.softsign-relu.
+Fitting model with softsign with relu took 3.0191447734832764 seconds
+Currently looking at softsign with sigmoid
+11/11 - 0s - loss: 0.0054 - accuracy: 1.0000
+Model saved to model-small.softsign-sigmoid.
+Fitting model with softsign with sigmoid took 2.812344551086426 seconds
+Currently looking at softsign with softmax
+11/11 - 0s - loss: 0.7050 - accuracy: 1.0000
+Model saved to model-small.softsign-softmax.
+Fitting model with softsign with softmax took 2.9490413665771484 seconds
+Currently looking at softsign with softplus
+11/11 - 0s - loss: 4.9780e-04 - accuracy: 1.0000
+Model saved to model-small.softsign-softplus.
+Fitting model with softsign with softplus took 3.5562188625335693 seconds
+Currently looking at softsign with softsign
+11/11 - 0s - loss: 0.0019 - accuracy: 1.0000
+Model saved to model-small.softsign-softsign.
+Fitting model with softsign with softsign took 2.910590887069702 seconds
+Currently looking at softsign with tanh
+11/11 - 0s - loss: 0.9713 - accuracy: 0.6190
+Model saved to model-small.softsign-tanh.
+Fitting model with softsign with tanh took 3.0106027126312256 seconds
+Currently looking at softsign with selu
+11/11 - 0s - loss: 0.0104 - accuracy: 0.9970
+Model saved to model-small.softsign-selu.
+Fitting model with softsign with selu took 2.7497663497924805 seconds
+Currently looking at softsign with elu
+11/11 - 0s - loss: 0.0093 - accuracy: 0.9970
+Model saved to model-small.softsign-elu.
+Fitting model with softsign with elu took 2.873870611190796 seconds
+Currently looking at softsign with exponential
+11/11 - 0s - loss: 0.5054 - accuracy: 0.8244
+Model saved to model-small.softsign-exponential.
+Fitting model with softsign with exponential took 3.399233341217041 seconds
+Currently looking at tanh with relu
+11/11 - 0s - loss: 0.0018 - accuracy: 1.0000
+Model saved to model-small.tanh-relu.
+Fitting model with tanh with relu took 2.7715322971343994 seconds
+Currently looking at tanh with sigmoid
+11/11 - 0s - loss: 0.7182 - accuracy: 0.6190
+Model saved to model-small.tanh-sigmoid.
+Fitting model with tanh with sigmoid took 2.8635358810424805 seconds
+Currently looking at tanh with softmax
+11/11 - 0s - loss: 0.7763 - accuracy: 0.8065
+Model saved to model-small.tanh-softmax.
+Fitting model with tanh with softmax took 3.855199098587036 seconds
+Currently looking at tanh with softplus
+11/11 - 0s - loss: 0.0078 - accuracy: 1.0000
+Model saved to model-small.tanh-softplus.
+Fitting model with tanh with softplus took 3.712050437927246 seconds
+Currently looking at tanh with softsign
+11/11 - 0s - loss: 0.0038 - accuracy: 1.0000
+Model saved to model-small.tanh-softsign.
+Fitting model with tanh with softsign took 3.6494522094726562 seconds
+Currently looking at tanh with tanh
+11/11 - 0s - loss: 0.7708 - accuracy: 0.6190
+Model saved to model-small.tanh-tanh.
+Fitting model with tanh with tanh took 3.700382709503174 seconds
+Currently looking at tanh with selu
+11/11 - 0s - loss: 0.0055 - accuracy: 0.9970
+Model saved to model-small.tanh-selu.
+Fitting model with tanh with selu took 3.7128958702087402 seconds
+Currently looking at tanh with elu
+11/11 - 0s - loss: 0.0031 - accuracy: 1.0000
+Model saved to model-small.tanh-elu.
+Fitting model with tanh with elu took 3.7708628177642822 seconds
+Currently looking at tanh with exponential
+11/11 - 0s - loss: 0.0415 - accuracy: 0.9881
+Model saved to model-small.tanh-exponential.
+Fitting model with tanh with exponential took 3.970625877380371 seconds
+Currently looking at selu with relu
+11/11 - 0s - loss: 0.0148 - accuracy: 0.9970
+Model saved to model-small.selu-relu.
+Fitting model with selu with relu took 3.831286668777466 seconds
+Currently looking at selu with sigmoid
+11/11 - 0s - loss: 0.9359 - accuracy: 0.6190
+Model saved to model-small.selu-sigmoid.
+Fitting model with selu with sigmoid took 3.463125705718994 seconds
+Currently looking at selu with softmax
+11/11 - 0s - loss: 0.9718 - accuracy: 0.6190
+Model saved to model-small.selu-softmax.
+Fitting model with selu with softmax took 3.1810109615325928 seconds
+Currently looking at selu with softplus
+11/11 - 0s - loss: 0.0466 - accuracy: 0.9911
+Model saved to model-small.selu-softplus.
+Fitting model with selu with softplus took 2.9827306270599365 seconds
+Currently looking at selu with softsign
+11/11 - 0s - loss: 0.0061 - accuracy: 0.9970
+Model saved to model-small.selu-softsign.
+Fitting model with selu with softsign took 3.9241912364959717 seconds
+Currently looking at selu with tanh
+11/11 - 0s - loss: 0.9740 - accuracy: 0.6190
+Model saved to model-small.selu-tanh.
+Fitting model with selu with tanh took 3.336214780807495 seconds
+Currently looking at selu with selu
+11/11 - 0s - loss: 0.1316 - accuracy: 0.9970
+Model saved to model-small.selu-selu.
+Fitting model with selu with selu took 3.110321044921875 seconds
+Currently looking at selu with elu
+11/11 - 0s - loss: 0.0027 - accuracy: 0.9970
+Model saved to model-small.selu-elu.
+Fitting model with selu with elu took 2.9333832263946533 seconds
+Currently looking at selu with exponential
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.selu-exponential.
+Fitting model with selu with exponential took 3.1581833362579346 seconds
+Currently looking at elu with relu
+11/11 - 0s - loss: 0.0324 - accuracy: 0.9970
+Model saved to model-small.elu-relu.
+Fitting model with elu with relu took 3.0254111289978027 seconds
+Currently looking at elu with sigmoid
+11/11 - 0s - loss: 0.9443 - accuracy: 0.6190
+Model saved to model-small.elu-sigmoid.
+Fitting model with elu with sigmoid took 3.499593496322632 seconds
+Currently looking at elu with softmax
+11/11 - 0s - loss: 1.0030 - accuracy: 0.6190
+Model saved to model-small.elu-softmax.
+Fitting model with elu with softmax took 3.0821428298950195 seconds
+Currently looking at elu with softplus
+11/11 - 0s - loss: 0.0193 - accuracy: 0.9940
+Model saved to model-small.elu-softplus.
+Fitting model with elu with softplus took 3.014601945877075 seconds
+Currently looking at elu with softsign
+11/11 - 0s - loss: 0.4160 - accuracy: 0.8065
+Model saved to model-small.elu-softsign.
+Fitting model with elu with softsign took 3.5337064266204834 seconds
+Currently looking at elu with tanh
+11/11 - 0s - loss: 0.9485 - accuracy: 0.6190
+Model saved to model-small.elu-tanh.
+Fitting model with elu with tanh took 3.6257426738739014 seconds
+Currently looking at elu with selu
+11/11 - 0s - loss: 5.1837e-04 - accuracy: 1.0000
+Model saved to model-small.elu-selu.
+Fitting model with elu with selu took 3.392969846725464 seconds
+Currently looking at elu with elu
+11/11 - 0s - loss: 0.0194 - accuracy: 0.9940
+Model saved to model-small.elu-elu.
+Fitting model with elu with elu took 3.340470790863037 seconds
+Currently looking at elu with exponential
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.elu-exponential.
+Fitting model with elu with exponential took 3.0464060306549072 seconds
+Currently looking at exponential with relu
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.exponential-relu.
+Fitting model with exponential with relu took 3.1929092407226562 seconds
+Currently looking at exponential with sigmoid
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.exponential-sigmoid.
+Fitting model with exponential with sigmoid took 2.982598066329956 seconds
+Currently looking at exponential with softmax
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.exponential-softmax.
+Fitting model with exponential with softmax took 2.936232089996338 seconds
+Currently looking at exponential with softplus
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.exponential-softplus.
+Fitting model with exponential with softplus took 3.15848970413208 seconds
+Currently looking at exponential with softsign
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.exponential-softsign.
+Fitting model with exponential with softsign took 2.6996288299560547 seconds
+Currently looking at exponential with tanh
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.exponential-tanh.
+Fitting model with exponential with tanh took 3.3319334983825684 seconds
+Currently looking at exponential with selu
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.exponential-selu.
+Fitting model with exponential with selu took 2.906856060028076 seconds
+Currently looking at exponential with elu
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.exponential-elu.
+Fitting model with exponential with elu took 3.0999491214752197 seconds
+Currently looking at exponential with exponential
+11/11 - 0s - loss: nan - accuracy: 0.6190
+Model saved to model-small.exponential-exponential.
+Fitting model with exponential with exponential took 3.154521942138672 seconds
